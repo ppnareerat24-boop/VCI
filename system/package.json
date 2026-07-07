@@ -1,0 +1,20 @@
+{
+  "name": "face_scan",
+  "version": "1.0.0",
+  "description": "ระบบเช็คชื่อด้วยใบหน้า (Face recognition attendance) — local web app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "face-recognition",
+    "attendance",
+    "face-api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@vladmandic/face-api": "^1.7.15"
+  }
+}

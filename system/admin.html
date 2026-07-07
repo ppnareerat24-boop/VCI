@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ผู้ดูแลระบบ — ระบบเช็คชื่อด้วยใบหน้า</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="admin-body-bg">
+
+  <!-- ===== หน้า Login ===== -->
+  <div id="loginView" class="login-view">
+    <div class="card">
+      <h1 id="loginTitle">เข้าสู่ระบบผู้ดูแล</h1>
+
+      <!-- โหมดเข้าสู่ระบบ -->
+      <form id="loginForm" class="auth-form">
+        <label class="field">
+          <span>ชื่อผู้ใช้</span>
+          <input id="loginUser" type="text" autocomplete="username" placeholder="admin" />
+        </label>
+        <label class="field">
+          <span>รหัสผ่าน</span>
+          <input id="loginPass" type="password" autocomplete="current-password" />
+        </label>
+        <div id="loginError" class="auth-error hidden"></div>
+        <button type="submit" class="btn btn-blue btn-block">เข้าสู่ระบบ</button>
+      </form>
+
+      <!-- โหมดตั้งรหัสผ่านครั้งแรก -->
+      <form id="setupForm" class="auth-form hidden">
+        <p class="hint">ยังไม่ได้ตั้งรหัสผ่านผู้ดูแล — กรุณาตั้งค่าครั้งแรก</p>
+        <label class="field">
+          <span>ชื่อผู้ใช้</span>
+          <input id="setupUser" type="text" autocomplete="username" value="admin" />
+        </label>
+        <label class="field">
+          <span>รหัสผ่าน (อย่างน้อย 4 ตัว)</span>
+          <input id="setupPass" type="password" autocomplete="new-password" />
+        </label>
+        <label class="field">
+          <span>ยืนยันรหัสผ่าน</span>
+          <input id="setupConfirm" type="password" autocomplete="new-password" />
+        </label>
+        <div id="setupError" class="auth-error hidden"></div>
+        <button type="submit" class="btn btn-green btn-block">ตั้งรหัสผ่านและเข้าใช้งาน</button>
+      </form>
+
+      <a href="index.html" class="back-link">← กลับหน้าเช็คชื่อ</a>
+    </div>
+  </div>
+
+  <!-- ===== หน้าผู้ดูแลระบบ ===== -->
+  <div id="panelView" class="admin-page hidden">
+    <header class="admin-header">
+      <h1>หน้าต่างผู้ดูแลระบบ</h1>
+      <div class="head-actions">
+        <a href="index.html" class="btn btn-light">← กลับหน้าเช็คชื่อ</a>
+        <button id="btnLogout" class="btn btn-light">ออกจากระบบ</button>
+      </div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="tabUsers">รายชื่อผู้ลงทะเบียน</button>
+      <button class="tab" data-tab="tabHistory">ประวัติเช็คชื่อ</button>
+    </div>
+
+    <div class="admin-content">
+      <!-- แท็บ: รายชื่อผู้ลงทะเบียน -->
+      <div id="tabUsers" class="tab-panel">
+        <h3>ผู้ลงทะเบียนแล้ว</h3>
+        <label class="field">
+          <input id="userSearch" type="search" placeholder="ค้นหาชื่อผู้ลงทะเบียน..." autocomplete="off" />
+        </label>
+        <ul id="userList" class="user-list"></ul>
+        <div id="userEmpty" class="empty hidden">ไม่พบชื่อที่ค้นหา</div>
+      </div>
+
+      <!-- แท็บ: ประวัติ -->
+      <div id="tabHistory" class="tab-panel hidden">
+        <div class="filters">
+          <label class="field inline">
+            <span>วันที่</span>
+            <input id="filterDate" type="date" />
+          </label>
+          <label class="field inline">
+            <span>ชื่อ</span>
+            <select id="filterName"><option value="">ทั้งหมด</option></select>
+          </label>
+          <button id="btnClearFilter" class="btn btn-light">ล้างตัวกรอง</button>
+          <span class="spacer"></span>
+          <button id="btnExportCsv" class="btn btn-light">ส่งออก CSV</button>
+          <button id="btnClearHistory" class="btn btn-red">ล้างประวัติทั้งหมด</button>
+        </div>
+        <div class="table-wrap">
+          <table class="history-table">
+            <thead>
+              <tr><th>#</th><th>ชื่อ</th><th>ประเภท</th><th>เหตุผล (บุคคลภายนอก)</th><th>วันที่</th><th>เวลา</th></tr>
+            </thead>
+            <tbody id="historyBody"></tbody>
+          </table>
+        </div>
+        <div id="historyEmpty" class="empty hidden">ยังไม่มีประวัติการเช็คชื่อ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/vendor/face-api.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/faceengine.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

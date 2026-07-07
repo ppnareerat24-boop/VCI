@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ระบบเช็คชื่อด้วยใบหน้า</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- โหลดโมเดล -->
+  <div id="loading" class="loading">
+    <div class="spinner"></div>
+    <div id="loadingText">กำลังโหลดระบบ...</div>
+  </div>
+
+  <main class="app">
+    <!-- ฝั่งซ้าย: กล้อง -->
+    <section class="camera-pane">
+      <div class="camera-wrap">
+        <video id="video" autoplay muted playsinline></video>
+        <canvas id="overlay"></canvas>
+        <div id="cameraPlaceholder" class="camera-placeholder">CAMERA<br />FRAME</div>
+      </div>
+    </section>
+
+    <!-- ฝั่งขวา: ข้อมูล -->
+    <section class="info-pane">
+      <div class="info-content">
+        <div class="row">
+          <span class="label">ชื่อ :</span>
+          <span id="nameValue" class="value name">—</span>
+        </div>
+
+        <div id="personType" class="person-type"></div>
+
+        <div class="row">
+          <span class="label">สถานะ :</span>
+          <span id="statusBadge" class="badge badge-idle">กำลังค้นหาใบหน้า...</span>
+        </div>
+
+        <div id="datetime" class="datetime">DD/MM/YY<br />00:00:00</div>
+      </div>
+
+      <div class="info-actions">
+        <a href="register.html" id="btnRegister" class="btn btn-green">ลงทะเบียน</a>
+        <a href="admin.html" id="btnAdmin" class="btn btn-blue">สำหรับผู้ดูแลระบบ</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <!-- @vladmandic/face-api (vendored locally for offline use) -->
+  <script src="js/vendor/face-api.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/faceengine.js"></script>
+  <script src="js/checkin.js"></script>
+</body>
+</html>
