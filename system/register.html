@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ลงทะเบียน — ระบบเช็คชื่อด้วยใบหน้า</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="admin-body-bg">
+
+  <div class="admin-page">
+    <header class="admin-header">
+      <h1>ลงทะเบียนครั้งแรก</h1>
+      <div class="head-actions">
+        <a href="index.html" class="btn btn-light">← กลับหน้าเช็คชื่อ</a>
+      </div>
+    </header>
+
+    <div class="admin-content">
+      <p class="hint">หันหน้าเข้ากล้องให้ชัด อยู่ในแสงสว่างพอ ดูภาพตัวอย่างด้านล่าง แล้วกด “เริ่มจับภาพใบหน้า”</p>
+
+      <div class="reg-preview">
+        <video id="regVideo" autoplay muted playsinline></video>
+        <div id="regPreviewPlaceholder" class="reg-preview-ph">กำลังเปิดกล้อง...</div>
+      </div>
+
+      <label class="field">
+        <span>ชื่อ-นามสกุล</span>
+        <input id="regName" type="text" placeholder="เช่น สมชาย ใจดี" autocomplete="off" />
+      </label>
+
+      <div class="field">
+        <span>ประเภทผู้ลงทะเบียน</span>
+        <div class="radio-row">
+          <label class="radio">
+            <input type="radio" name="regType" value="คณะศึกษาดูงาน" checked />
+            คณะศึกษาดูงาน
+          </label>
+          <label class="radio">
+            <input type="radio" name="regType" value="บุคคลภายนอก" />
+            บุคคลภายนอก
+          </label>
+        </div>
+      </div>
+
+      <p class="hint" id="outsiderNote" style="display:none;">
+        * บุคคลภายนอก: เหตุผลที่เข้าโรงเรียนให้กรอกในหน้าผู้ดูแล ▸ แท็บ “ประวัติเช็คชื่อ” ภายหลัง
+      </p>
+
+      <div class="capture-row">
+        <button id="btnCapture" class="btn btn-green">เริ่มจับภาพใบหน้า</button>
+        <span id="captureStatus" class="capture-status">ตัวอย่างที่เก็บได้: 0 / 5</span>
+      </div>
+
+      <div class="reg-actions">
+        <button id="btnSaveUser" class="btn btn-blue" disabled>บันทึก</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/vendor/face-api.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/faceengine.js"></script>
+  <script src="js/register.js"></script>
+</body>
+</html>
